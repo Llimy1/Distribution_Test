@@ -49,6 +49,8 @@ if [ -z $IS_GREEN  ];then # blue라면
   sudo cp /etc/nginx/nginx.green.conf /etc/nginx/nginx.conf
   sudo nginx -s reload
 
+  cd /home/ubuntu/app/docker
+
   echo "5. blue container down"
   docker-compose stop blue
 else
@@ -76,6 +78,8 @@ else
   echo "4. reload nginx"
   sudo cp /etc/nginx/nginx.blue.conf /etc/nginx/nginx.conf
   sudo nginx -s reload
+
+  cd /home/ubuntu/app/docker
 
   echo "5. green container down"
   docker-compose stop green
