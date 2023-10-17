@@ -18,5 +18,4 @@ public class DistributionTestApplication {
     public String handleRequest() {
         return "ok";
     }
-
 }
