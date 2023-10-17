@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  green:
+    container_name: green
+    image: llimy1/distribution-test
+    ports:
+      - "8080:8080"
+
+  blue:
+    container_name: blue
+    image: llimy1/distribution-test
+    ports:
+      - "8081:8080"
