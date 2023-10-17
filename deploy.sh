@@ -19,7 +19,7 @@
 
 #APP_NAME=web
 
-IS_GREEN=$(docker-compose ps | grep green) # 현재 실행중인 App이 blue인지 확인
+IS_GREEN=$(docker ps | grep green) # 현재 실행중인 App이 blue인지 확인
 DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
 if [ -z $IS_GREEN  ];then # blue라면
