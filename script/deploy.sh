@@ -27,10 +27,10 @@ if [ -z $IS_GREEN  ];then # blue라면
   echo "### BLUE => GREEN ###"
 
   cd /home/ubuntu/app/docker
-
   echo "1. get green image"
   docker-compose pull green # 이미지 받아서
 
+  cd /home/ubuntu/app/docker
   echo "2. green container up"
   docker-compose up -d green # 컨테이너 실행
 
@@ -50,17 +50,16 @@ if [ -z $IS_GREEN  ];then # blue라면
   sudo nginx -s reload
 
   cd /home/ubuntu/app/docker
-
   echo "5. blue container down"
   docker-compose stop blue
 else
   echo "### GREEN => BLUE ###"
 
   cd /home/ubuntu/app/docker
-
   echo "1. get blue image"
   docker-compose pull blue
 
+  cd /home/ubuntu/app/docker
   echo "2. blue container up"
   docker-compose up -d blue
 
@@ -80,7 +79,6 @@ else
   sudo nginx -s reload
 
   cd /home/ubuntu/app/docker
-
   echo "5. green container down"
   docker-compose stop green
 fi
