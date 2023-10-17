@@ -90,7 +90,7 @@ jobs:
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         script: |
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-          chmod 777 ./deploy.sh
-          ./deploy.sh
+          chmod 777 ./script/deploy.sh
+          ./script/deploy.sh
           docker image prune -f
 
