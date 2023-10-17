@@ -18,21 +18,22 @@
 #fi
 
 APP_NAME=web
+DOCKER_DIR = /home/ubuntu/app/docker
 
-IS_GREEN=$(docker ps | grep green) # 현재 실행중인 App이 blue인지 확인
+IS_GREEN=$(cd $DOCKER_DIR && docker-compose ps | grep green) # 현재 실행중인 App이 blue인지 확인
 DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
 if [ -z $IS_GREEN  ];then # blue라면
 
   echo "### BLUE => GREEN ###"
 
-  cd /home/ubuntu/app/docker
-  echo "1. get green image"
-  docker-compose pull green # 이미지 받아서
 
-  cd /home/ubuntu/app/docker
+  echo "1. get green image"
+  cd $DOCKER_DIR && docker-compose pull green # 이미지 받아서
+
+
   echo "2. green container up"
-  docker-compose up -d green # 컨테이너 실행
+  cd $DOCKER_DIR && docker-compose up -d green # 컨테이너 실행
 
   while [ 1 = 1 ]; do
   echo "3. green health check..."
@@ -49,19 +50,16 @@ if [ -z $IS_GREEN  ];then # blue라면
   sudo cp /etc/nginx/nginx.green.conf /etc/nginx/nginx.conf
   sudo nginx -s reload
 
-  cd /home/ubuntu/app/docker
   echo "5. blue container down"
-  docker-compose stop blue
+  cd $DOCKER_DIR && docker-compose stop blue
 else
   echo "### GREEN => BLUE ###"
 
-  cd /home/ubuntu/app/docker
   echo "1. get blue image"
-  docker-compose pull blue
+  cd $DOCKER_DIR && docker-compose pull blue
 
-  cd /home/ubuntu/app/docker
   echo "2. blue container up"
-  docker-compose up -d blue
+  cd $DOCKER_DIR && docker-compose up -d blue
 
   while [ 1 = 1 ]; do
     echo "3. blue health check..."
@@ -78,7 +76,6 @@ else
   sudo cp /etc/nginx/nginx.blue.conf /etc/nginx/nginx.conf
   sudo nginx -s reload
 
-  cd /home/ubuntu/app/docker
   echo "5. green container down"
-  docker-compose stop green
+  cd $DOCKER_DIR && docker-compose stop green
 fi
