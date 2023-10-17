@@ -26,6 +26,8 @@ if [ -z $IS_GREEN  ];then # blue라면
 
   echo "### BLUE => GREEN ###"
 
+  cd /home/ubuntu/app/docker
+
   echo "1. get green image"
   docker-compose pull green # 이미지 받아서
 
@@ -51,6 +53,8 @@ if [ -z $IS_GREEN  ];then # blue라면
   docker-compose stop blue
 else
   echo "### GREEN => BLUE ###"
+
+  cd /home/ubuntu/app/docker
 
   echo "1. get blue image"
   docker-compose pull blue
