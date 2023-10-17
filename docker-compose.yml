@@ -5,10 +5,10 @@ services:
     container_name: green
     image: llimy1/distribution-test
     ports:
-      - "8080:80"
+      - "8080:8080"
 
   blue:
     container_name: blue
     image: llimy1/distribution-test
     ports:
-      - "8081:80"
+      - "8081:8080"
