@@ -17,10 +17,9 @@
 #  echo "redis is already running"
 #fi
 
-APP_NAME=web
-DOCKER_DIR = /home/ubuntu/app/docker
+#APP_NAME=web
 
-IS_GREEN=$(cd $DOCKER_DIR && docker-compose ps | grep green) # 현재 실행중인 App이 blue인지 확인
+IS_GREEN=$(docker-compose ps | grep green) # 현재 실행중인 App이 blue인지 확인
 DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
 if [ -z $IS_GREEN  ];then # blue라면
@@ -29,11 +28,11 @@ if [ -z $IS_GREEN  ];then # blue라면
 
 
   echo "1. get green image"
-  cd $DOCKER_DIR && docker-compose pull green # 이미지 받아서
+  docker-compose pull green # 이미지 받아서
 
 
   echo "2. green container up"
-  cd $DOCKER_DIR && docker-compose up -d green # 컨테이너 실행
+  docker-compose up -d green # 컨테이너 실행
 
   while [ 1 = 1 ]; do
   echo "3. green health check..."
@@ -51,15 +50,15 @@ if [ -z $IS_GREEN  ];then # blue라면
   sudo nginx -s reload
 
   echo "5. blue container down"
-  cd $DOCKER_DIR && docker-compose stop blue
+  docker-compose stop blue
 else
   echo "### GREEN => BLUE ###"
 
   echo "1. get blue image"
-  cd $DOCKER_DIR && docker-compose pull blue
+  docker-compose pull blue
 
   echo "2. blue container up"
-  cd $DOCKER_DIR && docker-compose up -d blue
+  docker-compose up -d blue
 
   while [ 1 = 1 ]; do
     echo "3. blue health check..."

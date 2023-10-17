@@ -55,7 +55,7 @@ jobs:
     - name: Docker Build & Push to Hub
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} -f ./docker/Dockerfile .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} -f ./Dockerfile .
         docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
 
     # 도커 컴포즈 설정 파일 서버로 전달하기(복사 후 붙여넣기)
@@ -66,8 +66,8 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         port: 22
-        source: "./docker/docker-compose.yml"
-        target: "/home/ubuntu/app"
+        source: "./docker-compose.yml"
+        target: "/home/ubuntu"
 
     # deploy.sh 파일 서버로 전달하기(복사 후 붙여넣기)
     - name: Send deploy.sh
@@ -77,8 +77,8 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         port: 22
-        source: "./script/deploy.sh"
-        target: "/home/ubuntu/app"
+        source: "./deploy.sh"
+        target: "/home/ubuntu"
 
     # 도커 컴포즈 실행하기
     # 도커 허브에서 jar파일 및 pull후에 컴포즈 up
@@ -90,7 +90,7 @@ jobs:
         key: ${{ secrets.EC2_PRIVATE_KEY }}
         script: |
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-          chmod 777 ./app/script/deploy.sh
-          ./app/script/deploy.sh
+          chmod 777 ./deploy.sh
+          ./deploy.sh
           docker image prune -f
 
