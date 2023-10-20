@@ -3,6 +3,7 @@ spring:
     include:
       - db
       - aws
+    active: prod
 
   servlet:
     multipart:
