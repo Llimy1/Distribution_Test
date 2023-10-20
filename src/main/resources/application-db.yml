@@ -1,7 +1,4 @@
 spring:
-  config:
-    import: optional:file:.env
-
   datasource:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
