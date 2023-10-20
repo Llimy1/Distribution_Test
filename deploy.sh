@@ -1,24 +1,5 @@
 #!/bin/bash
 
-#if [ $(docker ps | grep -c "db") -eq 0 ]; then
-#  echo "### Starting database ###"
-#  docker-compose up -d db
-#else
-#  echo "db is already running"
-#fi
-#
-#echo
-#echo
-#
-#if [ $(docker ps | grep -c "redis") -eq 0 ]; then
-#  echo "### Starting redis ###"
-#  docker-compose up -d redis
-#else
-#  echo "redis is already running"
-#fi
-
-#APP_NAME=web
-
 IS_GREEN=$(docker ps | grep green) # 현재 실행중인 App이 blue인지 확인
 DEFAULT_CONF=" /etc/nginx/nginx.conf"
 
