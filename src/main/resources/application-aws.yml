@@ -6,6 +6,6 @@ cloud:
       access-key: ${AWS_ACCESS_KEY}
       secret-key: ${AWS_SECRET_KEY}
     region:
-      static: ap-northeast-2xq
+      static: ap-northeast-2
     stack:
       auto: false
